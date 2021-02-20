@@ -1,0 +1,11 @@
+.request-panel {
+    background-color: #f2eadf;
+    border-radius: 7px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.result-row {
+    margin-top: 30px;
+}
