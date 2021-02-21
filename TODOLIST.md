@@ -1,0 +1,13 @@
+## TODOLIST
+- [OK] use react bootstrap
+- use redux
+  - [OK] create store
+  - [OK] use react redux
+  - use thunks for fetching data
+  - split reducers
+  - use redux toolkit functions
+- validation des types avec PropTypes
+- use different profiles
+- deploy app with heroku
+- use sass
+- be responsive

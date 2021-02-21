@@ -3,11 +3,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import JsonviewComponent from "./jsonview/JsonviewComponent";
+import RequestFormComponent from "./request/RequestFormComponent";
+import ResponseComponent from "./response/ResponseComponent";
 
 import './ContentComponent.css';
-
-import RequestFormComponent from "./request/RequestFormComponent";
 
 class ContentComponent extends React.Component {
 
@@ -15,17 +14,14 @@ class ContentComponent extends React.Component {
         return (
             <Container fluid>
                 <Row className="main-block">
-                    <Col xs={3}>
+                    <Col xs={4}>
                         <h3 className="block-title">Pick notes</h3>
                         <RequestFormComponent/>
                     </Col>
                 </Row>
                 <Row className="main-block result-row">
                     <Col>
-                        <h1>Gmaj7</h1>
-                    </Col>
-                    <Col xs={4}>
-                        <JsonviewComponent/>
+                        <ResponseComponent/>
                     </Col>
                 </Row>
             </Container>

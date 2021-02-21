@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
-import store from '../../store/store';
+
+import { findChordFailure, findChordSuccess } from "../../store/actions";
+
 import './RequestFormComponent.css';
 
 class RequestFormComponent extends React.Component {
@@ -13,18 +16,15 @@ class RequestFormComponent extends React.Component {
         super(props);
 
         this.state = {
-            showError: false,
-            request: ['D', 'F#', 'G', 'E']
+            request: ['D', 'F#', 'G', 'B']
         };
 
         this.noteSelector = React.createRef();
 
         this.handleAddNote = this.handleAddNote.bind(this);
+        this.handleRemoveNote = this.handleRemoveNote.bind(this);
         this.handleClearRequest = this.handleClearRequest.bind(this);
         this.handleFindChord = this.handleFindChord.bind(this);
-
-        this.showErrorMessage = this.showErrorMessage.bind(this);
-        this.hideErrorMessage = this.hideErrorMessage.bind(this);
     }
 
     handleAddNote(e) {
@@ -36,6 +36,20 @@ class RequestFormComponent extends React.Component {
                 });
             }
             return state;
+        });
+        e.preventDefault();
+    }
+
+    handleRemoveNote(e) {
+        this.setState((state) => {
+            if (state.request.length > 1) {
+                return ({
+                    request:  state.request.slice(0, state.request.length - 1)
+                });
+            }
+            return ({
+                request: []
+            });
         });
         e.preventDefault();
     }
@@ -54,37 +68,22 @@ class RequestFormComponent extends React.Component {
 
         axios.post('https://nameless-temple-87656.herokuapp.com/chords', requestBody)
             .then(res => {
-                store.dispatch({
-                    type: 'chord/responseFound',
-                    payload: res.data
-                });
-                this.hideErrorMessage();
+                this.props.findChordSuccess(res.data);
             })
             .catch(error => {
                 console.error(JSON.stringify(error));
-                this.showErrorMessage();
+                this.props.findChordFailure();
             })
-    }
-
-    showErrorMessage() {
-        this.setState({
-            showError: true
-        });
-    }
-
-    hideErrorMessage() {
-        this.setState({
-            showError: false
-        });
     }
 
     render() {
         return (
             <Form>
-                {this.state.request.length > 0 &&
-                <div className="request-description">{this.state.request.map((note) =>
-                    <span key={note} className="request-note">{note}</span>)}
-                </div>
+                {
+                    this.state.request.length > 0 &&
+                    <div className="request-description">{this.state.request.map((note) =>
+                        <span key={note} className="request-note">{note}</span>)}
+                    </div>
                 }
                 <Form.Row>
                     <Col>
@@ -104,7 +103,8 @@ class RequestFormComponent extends React.Component {
                         </Form.Control>
                     </Col>
                     <Col>
-                        <Button onClick={this.handleAddNote} variant="secondary" className="add-button">Add</Button>
+                        <Button onClick={this.handleAddNote} variant="info" className="button-mr">Add</Button>
+                        <Button onClick={this.handleRemoveNote} variant="secondary" className="button-mr">Remove</Button>
                         <Button onClick={this.handleClearRequest} variant="danger">Clear</Button>
                     </Col>
                 </Form.Row>
@@ -116,15 +116,14 @@ class RequestFormComponent extends React.Component {
                         block>
                     Find
                 </Button>
-
-                {this.state.showError &&
-                    <Alert variant="danger" onClose={this.hideErrorMessage} className="error-message" dismissible>
-                        An unexpected error occured
-                    </Alert>
-                }
             </Form>
         );
     }
 }
 
-export default RequestFormComponent;
+const mapDispatchToProps = {
+    findChordSuccess,
+    findChordFailure
+};
+
+export default connect(null, mapDispatchToProps)(RequestFormComponent);
