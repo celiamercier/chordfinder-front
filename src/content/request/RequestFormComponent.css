@@ -1,0 +1,28 @@
+.request-description {
+    width: 100%;
+    background-color: #f2eadf;
+    border-radius: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #d4c0a5;
+}
+
+.request-note {
+    margin-left: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #70604b;
+}
+
+.add-button {
+    margin-right: 10px;
+}
+
+.find-button {
+    margin-top: 20px;
+}
+
+.error-message {
+    margin-top: 20px;
+}
