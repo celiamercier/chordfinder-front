@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
-
+import store from '../../store/store';
 import './RequestFormComponent.css';
 
 class RequestFormComponent extends React.Component {
@@ -52,9 +52,12 @@ class RequestFormComponent extends React.Component {
             notes: this.state.request
         };
 
-        axios.post('http://localhost:8080/chords', requestBody)
+        axios.post('https://nameless-temple-87656.herokuapp.com/chords', requestBody)
             .then(res => {
-                console.log(JSON.stringify(res));
+                store.dispatch({
+                    type: 'chord/responseFound',
+                    payload: res.data
+                });
                 this.hideErrorMessage();
             })
             .catch(error => {
