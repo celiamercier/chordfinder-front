@@ -9,18 +9,17 @@ import ContentComponent from "./content/ContentComponent";
 class App extends React.Component {
     render() {
         return (
-            <Container fluid>
-                <Row>
-                    <Col>
-                        <div className="header">Chordfinder</div>
-                    </Col>
-                </Row>
-                <Row className="main-row" noGutters>
-                    <Col>
-                        <ContentComponent/>
-                    </Col>
-                </Row>
-            </Container>);
+            <div>
+                <div className="header">Chordfinder</div>
+                <Container fluid>
+                    <Row className="main-row" noGutters>
+                        <Col>
+                            <ContentComponent/>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        );
     }
 }
 

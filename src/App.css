@@ -7,6 +7,7 @@
 }
 
 .header {
+    width: 100%;
     background-color: rgb(39, 40, 34);
     padding: 15px;
     color: white;
