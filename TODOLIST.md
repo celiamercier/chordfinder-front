@@ -3,7 +3,7 @@
 - use redux
   - [OK] create store
   - [OK] use react redux
-  - use thunks for fetching data
+  - [OK] use thunks for fetching async data
   - [OK] split reducers
   - use redux toolkit functions
 - validation des types avec PropTypes

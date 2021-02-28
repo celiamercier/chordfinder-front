@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+import Spinner from 'react-bootstrap/Spinner';
 
 import './RequestFormComponent.css';
 
-import { findChordFailure, findChordSuccess } from "./RequestFormDuck";
+import { findChord } from "./RequestFormDuck";
 
 class RequestFormComponent extends React.Component {
 
@@ -61,18 +61,7 @@ class RequestFormComponent extends React.Component {
     }
 
     handleFindChord() {
-        const requestBody = {
-            notes: this.state.request
-        };
-
-        axios.post('https://nameless-temple-87656.herokuapp.com/chords', requestBody)
-            .then(res => {
-                this.props.findChordSuccess(res.data);
-            })
-            .catch(error => {
-                console.error(JSON.stringify(error));
-                this.props.findChordFailure();
-            })
+        this.props.findChord({ notes: this.state.request });
     }
 
     render() {
@@ -113,16 +102,30 @@ class RequestFormComponent extends React.Component {
                         variant="success"
                         size="lg"
                         block>
-                    Find
+                    { !this.props.isLoading && 'Find'}
+                    {
+                        this.props.isLoading &&
+                        <Spinner
+                            as="span"
+                            animation="border"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                    }
                 </Button>
             </Form>
         );
     }
 }
 
-const mapDispatchToProps = {
-    findChordSuccess,
-    findChordFailure
+const mapStateToProps = (state) => {
+    return {
+        isLoading: state.chordRequest.response.loading
+    }
 };
 
-export default connect(null, mapDispatchToProps)(RequestFormComponent);
+const mapDispatchToProps = {
+    findChord,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RequestFormComponent);

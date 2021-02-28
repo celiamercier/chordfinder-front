@@ -1,17 +1,31 @@
+import axios from 'axios';
 
+const FIND_CHORD_LOADING_TYPE = 'chord/loading';
 const FIND_CHORD_SUCCESS_TYPE = 'chord/responseFound';
 const FIND_CHORD_FAILURE_TYPE = 'chord/responseError';
 
 const initialState = {
-    response: {}
+    response: {
+        loading: false
+    }
 };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case FIND_CHORD_LOADING_TYPE: {
+            return {
+                ...state,
+                response: {
+                    ...state.response,
+                    loading: true,
+                }
+            }
+        }
         case FIND_CHORD_SUCCESS_TYPE: {
             return {
                 ...state,
                 response: {
+                    loading: false,
                     success: true,
                     data: action.payload
                 }
@@ -21,6 +35,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 response: {
+                    loading: false,
                     success: false,
                     data: undefined
                 }
@@ -31,7 +46,16 @@ export default function reducer(state = initialState, action) {
     }
 };
 
-export const findChordSuccess = (data) => ({ type: FIND_CHORD_SUCCESS_TYPE, payload: data });
-
-
-export const findChordFailure = () => ({ type: FIND_CHORD_FAILURE_TYPE });
+export function findChord(request) {
+    return (dispatch) => {
+        dispatch({ type: FIND_CHORD_LOADING_TYPE });
+        axios.post('https://nameless-temple-87656.herokuapp.com/chords', request)
+            .then(res => {
+                dispatch({ type: FIND_CHORD_SUCCESS_TYPE, payload: res.data })
+            })
+            .catch(error => {
+                console.error(JSON.stringify(error));
+                dispatch({ type: FIND_CHORD_FAILURE_TYPE })
+            })
+    };
+}
