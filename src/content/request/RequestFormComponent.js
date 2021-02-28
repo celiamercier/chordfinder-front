@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 
-import { findChordFailure, findChordSuccess } from "../../store/actions";
-
 import './RequestFormComponent.css';
+
+import { findChordFailure, findChordSuccess } from "./RequestFormDuck";
 
 class RequestFormComponent extends React.Component {
 

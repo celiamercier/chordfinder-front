@@ -34,7 +34,7 @@ class ResponseComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        response: state.chord.response
+        response: state.chordRequest.response
     }
 };
 

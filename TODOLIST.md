@@ -4,7 +4,7 @@
   - [OK] create store
   - [OK] use react redux
   - use thunks for fetching data
-  - split reducers
+  - [OK] split reducers
   - use redux toolkit functions
 - validation des types avec PropTypes
 - use different profiles
