@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -31,6 +32,12 @@ class ResponseComponent extends React.Component {
         );
     }
 }
+
+ResponseComponent.propTypes = {
+    response: PropTypes.shape({
+        bestChords: PropTypes.arrayOf(PropTypes.string),
+    }),
+};
 
 const mapStateToProps = (state) => {
     return {

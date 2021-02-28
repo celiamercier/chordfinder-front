@@ -6,7 +6,7 @@
   - [OK] use thunks for fetching async data
   - [OK] split reducers
   - use redux toolkit functions
-- validation des types avec PropTypes
+- [OK] validation des types avec PropTypes
 - use different profiles
 - deploy app with heroku
 - use sass

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactJson from 'react-json-view';
 
 import './JsonviewComponent.css';
@@ -22,5 +23,10 @@ class JsonviewComponent extends React.Component {
         );
     }
 }
+
+JsonviewComponent.propTypes = {
+    value: PropTypes.object,
+};
+
 
 export default JsonviewComponent;

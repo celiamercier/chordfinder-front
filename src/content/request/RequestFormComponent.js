@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -117,6 +118,11 @@ class RequestFormComponent extends React.Component {
         );
     }
 }
+
+RequestFormComponent.propTypes = {
+    isLoading: PropTypes.bool,
+    findChord: PropTypes.func,
+};
 
 const mapStateToProps = (state) => {
     return {
