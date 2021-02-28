@@ -7,7 +7,7 @@
   - [OK] split reducers
   - use redux toolkit functions
 - [OK] validation des types avec PropTypes
-- use different profiles
-- deploy app with heroku
+- [OK] use different profiles
+- [OK] deploy app with heroku
 - use sass
 - be responsive

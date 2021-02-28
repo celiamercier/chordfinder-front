@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import config from '../../config/config';
 const FIND_CHORD_LOADING_TYPE = 'chord/loading';
 const FIND_CHORD_SUCCESS_TYPE = 'chord/responseFound';
 const FIND_CHORD_FAILURE_TYPE = 'chord/responseError';
@@ -49,7 +49,7 @@ export default function reducer(state = initialState, action) {
 export function findChord(request) {
     return (dispatch) => {
         dispatch({ type: FIND_CHORD_LOADING_TYPE });
-        axios.post('https://nameless-temple-87656.herokuapp.com/chords', request)
+        axios.post(`${config.SERVER_URL}/chords`, request)
             .then(res => {
                 dispatch({ type: FIND_CHORD_SUCCESS_TYPE, payload: res.data })
             })
